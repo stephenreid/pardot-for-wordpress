@@ -341,12 +341,13 @@ x	 */
 			$this->_get_url( $item_type, $args ),
 			array_merge( array(
 				'timeout' 		=> '30',
-				'redirection' => '5',
-				'method' 			=> 'POST',
+				'redirection'		=> '5',
+				'method' 		=> 'POST',
 				'blocking'		=> true,
 				'compress'		=> false,
-				'decompress'	=> true,
-				'sslverify' 	=> false,
+				'decompress'		=> true,
+				'sslverify'		=> false,
+				'body'			=> http_build_query($args)
 			), $args )
 		);
 
@@ -425,14 +426,13 @@ x	 */
 		if ( 'login' == $item_type ) {
 			$this->set_auth( $args );
 			$base_url = str_replace( '%%VERSION%%', self::VERSION, self::$LOGIN_URL_PATH_TEMPLATE );
-			$url = "{$base_url}?email={$this->email}&password={$this->password}&user_key={$this->user_key}";
+			$url = $base_url;
 		} else {
 			$base_url = str_replace(
 				array( '%%VERSION%%', '%%ITEM_TYPE%%', '%%ACTION%%' ),
 				array( self::VERSION, $item_type, 'account' == $item_type ? 'read' : 'query' ),
 				self::$URL_PATH_TEMPLATE
 			);
-			$url = "{$base_url}?user_key={$this->user_key}&api_key={$this->api_key}";
 		}
 		return self::ROOT_URL . $url;
 	}
