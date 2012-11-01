@@ -347,7 +347,7 @@ x	 */
 				'compress'		=> false,
 				'decompress'		=> true,
 				'sslverify'		=> false,
-				'body'			=> http_build_query($args)
+				'body'			=> $args
 			), $args )
 		);
 
